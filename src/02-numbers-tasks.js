@@ -52,7 +52,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -109,8 +109,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(x1, y1, x2, y2) {
-  return Math.atan2(y2 - y1, x2 - x1);
+function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
+  // return Math.atan2(y2 - y1, x2 - x1);
+  throw new Error('Not implemented');
 }
 
 /**
@@ -210,8 +211,19 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  const limit = Math.floor(Math.sqrt(n));
+
+  if ((n % 2 === 0 && n !== 2) || n <= 1) {
+    return false;
+  }
+
+  for (let i = 3; i <= limit; i += 2) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -230,7 +242,7 @@ function isPrime(/* n */) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (typeof (Number(value)) === 'number') {
+  if (typeof (Number(value)) === 'number' && value !== null && !Number.isNaN(Number(value))) {
     return value;
   }
   return def;

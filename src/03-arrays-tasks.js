@@ -59,9 +59,7 @@ function generateOdds(len) {
  *    [] => []
  */
 function doubleArray(arr) {
-  const newArr = [];
-  newArr.concat(arr);
-  return arr.splice(arr.length, 0, newArr);
+  return arr.concat(arr);
 }
 
 
@@ -108,8 +106,8 @@ function getArrayOfStrings(arr) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  return arr.filter(Boolean);
 }
 
 /**
@@ -123,8 +121,8 @@ function removeFalsyValues(/* arr */) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getUpperCaseStrings(arr) {
+  return arr.map((x) => x.toUpperCase());
 }
 
 
@@ -211,8 +209,16 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  let newStr = '';
+  arr.forEach((row, index) => {
+    if (index === arr.length - 1) {
+      newStr += row.join();
+    } else {
+      newStr += `${row.join()}\n`;
+    }
+  });
+  return newStr;
 }
 
 /**
@@ -227,7 +233,7 @@ function toCsvText(/* arr */) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-  const newArr = arr.map(Math.sqrt);
+  const newArr = arr.map((x) => (x ** 2));
   return newArr;
 }
 
@@ -246,8 +252,14 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const newArr = [];
+  let counter = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    newArr.push(arr[i] + counter);
+    counter += arr[i];
+  }
+  return newArr;
 }
 
 /**
@@ -317,7 +329,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter((item) => item > 0).length;
+  return arr.filter((item) => Number.isInteger(item) && item > 0).length;
 }
 
 /**
@@ -444,8 +456,22 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  arr.sort((a, b) => {
+    if (a.country < b.country) { return -1; }
+    if (a.country > b.country) { return 1; }
+    return 0;
+  });
+
+  arr.sort((a, b) => {
+    if (a.country === b.country) {
+      if (a.city < b.city) { return -1; }
+      if (a.city > b.city) { return 1; }
+    }
+    return 0;
+  });
+
+  return arr;
 }
 
 /**
