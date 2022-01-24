@@ -118,11 +118,14 @@ function timeSpanToString(startDate, endDate) {
  */
 function angleBetweenClockHands(/* date */) {
   throw new Error('Not implemented');
-  // const deg = 0.5 * (60 * date.getHours() - 11 * date.getMinutes());
+  // const actualDate = new Date(date);
+  // const deg = 0.5 * (60 * actualDate.getUTCHours() - 11 * actualDate.getUTCMinutes());
   // const rad = deg * (Math.PI / 180);
-  // return rad;
+  // if (rad % Math.PI === 0) {
+  //   return Math.PI;
+  // }
+  // return rad % Math.PI;
 }
-
 
 module.exports = {
   parseDataFromRfc2822,
