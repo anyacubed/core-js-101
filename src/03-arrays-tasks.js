@@ -294,8 +294,11 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   const newArr = [];
-  arr.forEach((x, i) => {
-    newArr.fill(x, newArr.length, newArr.length + i);
+  arr.map((x, index) => {
+    for (let i = 0; i < index + 1; i += 1) {
+      newArr.push(x);
+    }
+    return true;
   });
   return newArr;
 }
@@ -386,19 +389,9 @@ function getItemsSum(arr) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  // // let counter = 0;
-  // // arr.forEach((item) => {
-  // //   if (item === !variable) {
-  // //     counter += 1;
-  // //   }
-  // // });
-  // // return counter;
-  // if (arr.length > 0) {
-  //   return arr.filter(Boolean).length;
-  // }
-  // return 0;
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  const falsy = [0, '', null, undefined, false, NaN];
+  return arr.filter((a) => falsy.includes(a) === true).length;
 }
 
 /**
@@ -514,8 +507,12 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const arr = [];
+  for (let i = start; i <= end; i += 1) {
+    arr.push(i);
+  }
+  return arr;
 }
 
 /**
@@ -587,8 +584,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map((x) => childrenSelector(x)).flat(Infinity);
 }
 
 
@@ -635,8 +632,16 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let newArr = [];
+  const leftPart = arr.slice(Math.round(arr.length / 2));
+  const rightPart = arr.slice(0, Math.floor(arr.length / 2));
+  if (arr.length % 2 === 0) {
+    newArr = newArr.concat(leftPart, rightPart);
+  } else {
+    newArr = newArr.concat(leftPart, arr[Math.floor(arr.length / 2)], rightPart);
+  }
+  return newArr;
 }
 
 
