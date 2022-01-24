@@ -230,28 +230,31 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  // let str = '';
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let str = '';
 
-  // if (a > b) {
-  //   str = `${b}, ${a}`;
-  // } else {
-  //   str = `${a}, ${b}`;
-  // }
+  if (a > b) {
+    str = `${b}, ${a}`;
+  } else {
+    str = `${a}, ${b}`;
+  }
 
-  // if (isStartIncluded) {
-  //   str.substring(0) + '[' ;
-  // } else {
-  //   str.substring(0) = '(';
-  // }
+  if (isStartIncluded) {
+    const stringToAdd = '[';
+    str = stringToAdd + str.substring(0, str.length);
+  } else {
+    const stringToAdd = '(';
+    str = stringToAdd + str.substring(0, str.length);
+  }
 
-  // if (isEndIncluded) {
-  //   str[0] = ']';
-  // } else {
-  //   str[0] = ')';
-  // }
-  // return str;
-  throw new Error('Not implemented');
+  if (isEndIncluded) {
+    const stringToAdd = ']';
+    str = str.substring(0, str.length) + stringToAdd;
+  } else {
+    const stringToAdd = ')';
+    str = str.substring(0, str.length) + stringToAdd;
+  }
+  return str;
 }
 
 
@@ -406,7 +409,6 @@ function toNaryString(num, n) {
 function getCommonDirectoryPath(/* pathes */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the product of two specified matrixes.

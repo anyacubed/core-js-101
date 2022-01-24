@@ -255,10 +255,10 @@ function toArrayOfSquares(arr) {
 function getMovingSum(arr) {
   const newArr = [];
   let counter = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    newArr.push(arr[i] + counter);
-    counter += arr[i];
-  }
+  arr.forEach((x) => {
+    newArr.push(x + counter);
+    counter += x;
+  });
   return newArr;
 }
 
@@ -292,8 +292,12 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const newArr = [];
+  arr.forEach((x, i) => {
+    newArr.fill(x, newArr.length, newArr.length + i);
+  });
+  return newArr;
 }
 
 
@@ -345,8 +349,9 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const dict = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return arr.sort((a, b) => dict.indexOf(a) - dict.indexOf(b));
 }
 
 /**
